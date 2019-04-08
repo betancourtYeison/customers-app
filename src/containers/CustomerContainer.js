@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { withRouter, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import AppFrame from '../components/AppFrame';
-import { getCusomerByDni } from '../selectors/customers';
+import { getCustomerByDni } from '../selectors/customers';
 import CustomerEdit from '../components/CustomerEdit';
 import CustomerData from '../components/CustomerData';
 import { fetchCustomers } from '../actions/fetchCustomers';
@@ -58,7 +58,7 @@ CustomerContainer.propTypes = {
 };
 
 const mapStateToProps = (state, props) => ({
-    customer: getCusomerByDni(state, props)
+    customer: getCustomerByDni(state, props)
 });
 
 const mapDispatchToProps = { fetchCustomers, updateCustomer }
