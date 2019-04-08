@@ -1,0 +1,19 @@
+{
+  "customers": [
+    {
+      "dni": "1115453654",
+      "name": "Yeison Betancourt",
+      "age": "25"
+    },
+    {
+      "dni": "1115032455",
+      "name": "Alejandra Ospina",
+      "age": "25"
+    },
+    {
+      "dni": "1115123434",
+      "name": "Jorge Castaño",
+      "age": "26 "
+    }
+  ]
+}
