@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { reduxForm, Field } from 'redux-form';
 import { setPropsAsInitial } from '../helpers/setPropsAsInitial';
 import CustomersActions from '../components/CustomersActions';
+import { Prompt } from 'react-router-dom';
 
 const MyField = ({ input, meta, type, label, name }) => (
     <div>
@@ -32,9 +33,21 @@ const validate = values => {
 
 const isNumber = value => (
     isNaN(Number(value)) && "El campo debe ser un número"
-)
+);
 
-const CustomerEdit = ({ name, dni, age, handleSubmit, submitting, onBack }) => {
+const toUpperCase = value => (
+    value && value.toUpperCase()
+);
+
+const toNumber = value => (
+    value && Number(value)
+);
+
+const onlyGrow = (value, previousValue, values) => (
+    value && previousValue && value > previousValue ? value : previousValue
+);
+
+const CustomerEdit = ({ name, dni, age, handleSubmit, submitting, onBack, pristine, submitSucceeded }) => {
     return (
         <div>
             <h2>Edición del cliente</h2>
@@ -45,6 +58,8 @@ const CustomerEdit = ({ name, dni, age, handleSubmit, submitting, onBack }) => {
                     type="text"
                     // validate={isRequired}
                     label="Nombre:"
+                    parse={toUpperCase}
+                    // format={toUpperCase}
                     />
                 <Field 
                     name="dni" 
@@ -60,11 +75,25 @@ const CustomerEdit = ({ name, dni, age, handleSubmit, submitting, onBack }) => {
                     // validate={[isRequired, isNumber]}
                     validate={isNumber}
                     label="Edad:"
+                    parse={toNumber}
+                    // normalize={onlyGrow}
                     />
                 <CustomersActions>
-                    <button type="submit" disabled={submitting}>Aceptar</button>
-                    <button type="button" onClick={onBack}>Cancelar</button>
+                    <button 
+                        type="submit" 
+                        disabled={pristine || submitting}>
+                        Aceptar
+                    </button>
+                    <button 
+                        type="button" 
+                        disabled={submitting} 
+                        onClick={onBack}>
+                        Cancelar
+                    </button>
                 </CustomersActions>
+                <Prompt
+                    when={!pristine && !submitSucceeded}
+                    message="Se perderán los datos si continua" />
             </form>
         </div>
     );
