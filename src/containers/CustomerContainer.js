@@ -7,7 +7,8 @@ import { getCustomerByDni } from '../selectors/customers';
 import CustomerEdit from '../components/CustomerEdit';
 import CustomerData from '../components/CustomerData';
 import { fetchCustomers } from '../actions/fetchCustomers';
-import { updateCustomer } from '../actions/updateCustomer'
+import { updateCustomer } from '../actions/updateCustomer';
+import { SubmissionError } from 'redux-form';
 
 class CustomerContainer extends Component {
 
@@ -21,9 +22,15 @@ class CustomerContainer extends Component {
         this.props.history.goBack()
     }
 
-    handleSubmit = values => {
+    handleOnSubmitSuccess = () =>{
+        this.props.history.goBack()
+    }
+
+    handleOnSubmit = values => {
         const { id } = values
-        this.props.updateCustomer(id, values)
+        return this.props.updateCustomer(id, values).then(r => {
+            if (r.error) throw new SubmissionError(r.payload)
+        });
     }
 
     renderBody = () => (
@@ -32,7 +39,8 @@ class CustomerContainer extends Component {
                 const CustomerControl = match ? CustomerEdit : CustomerData;
                 return <CustomerControl 
                             {...this.props.customer} 
-                            onSubmit={this.handleSubmit} 
+                            onSubmit={this.handleOnSubmit}
+                            onSubmitSuccess={this.handleOnSubmitSuccess}
                             onBack={this.handleOnBack}
                             />;
             }
