@@ -8,21 +8,24 @@
     },
     {
       "id": "1115081370",
-      "dni": "1115081370",
-      "name": "Alejandra Ospina",
-      "age": 25
+      "dni": "12340987",
+      "name": "ALEJANDRA OSPINA",
+      "age": 25,
+      "isDelele": false
     },
     {
       "id": "1115123434",
       "dni": "1115123434",
-      "name": "Jorge Castaño",
-      "age": 26
+      "name": "JORGE CASTAÑO",
+      "age": 26,
+      "isDelele": false
     },
     {
-      "name": "LEWIS",
-      "dni": "1234",
+      "name": "LEWIS NOGUERA",
+      "dni": "123456",
       "age": 28,
-      "id": "gd4tjQk"
+      "id": "gd4tjQk",
+      "isDelele": false
     }
   ]
 }
