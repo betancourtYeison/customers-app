@@ -13,19 +13,16 @@ class HomeContainer extends Component {
 
     render(){
         return (
-            <header className="App-header">
-                <img src={logo} className="App-logo" alt="logo" />
-                <AppFrame 
-                    header='Home'
-                    body={
-                        <div>
-                            Esta es la pantalla inicial
-                            <CustomersActions>
-                                <button onClick={this.handleOnClick}>Listado de clientes</button>
-                            </CustomersActions>
-                        </div>  
-                    } />
-            </header>
+            <AppFrame 
+                header='Inicio'
+                body={
+                    <div>
+                        <img src={logo} className="App-logo" alt="logo" />
+                        <CustomersActions>
+                            <button onClick={this.handleOnClick} >Listado de clientes</button>
+                        </CustomersActions>        
+                    </div>  
+                } />
         );
     }
 };
