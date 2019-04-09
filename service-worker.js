@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "betancourtYeison.github.io/customers-app/precache-manifest.99108f951b617ad96ac73207cd666dea.js"
+  "/customers-app/precache-manifest.fa3e4e22317eb5c6db7eec6f93374105.js"
 );
 
 workbox.clientsClaim();
@@ -28,7 +28,7 @@ self.__precacheManifest = [].concat(self.__precacheManifest || []);
 workbox.precaching.suppressWarnings();
 workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
 
-workbox.routing.registerNavigationRoute("betancourtYeison.github.io/customers-app/index.html", {
+workbox.routing.registerNavigationRoute("/customers-app/index.html", {
   
   blacklist: [/^\/_/,/\/[^\/]+\.[^\/]+$/],
 });
