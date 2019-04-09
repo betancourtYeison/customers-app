@@ -1,13 +1,13 @@
 {
   "main.css": "/customers-app/static/css/main.caee6abb.chunk.css",
-  "main.js": "/customers-app/static/js/main.50cc7f03.chunk.js",
-  "main.js.map": "/customers-app/static/js/main.50cc7f03.chunk.js.map",
+  "main.js": "/customers-app/static/js/main.5eb09d0f.chunk.js",
+  "main.js.map": "/customers-app/static/js/main.5eb09d0f.chunk.js.map",
   "runtime~main.js": "/customers-app/static/js/runtime~main.a401290d.js",
   "runtime~main.js.map": "/customers-app/static/js/runtime~main.a401290d.js.map",
   "static/js/2.590fe88f.chunk.js": "/customers-app/static/js/2.590fe88f.chunk.js",
   "static/js/2.590fe88f.chunk.js.map": "/customers-app/static/js/2.590fe88f.chunk.js.map",
   "index.html": "/customers-app/index.html",
-  "precache-manifest.054a001ceef8f6a76bc1d814869f73c0.js": "/customers-app/precache-manifest.054a001ceef8f6a76bc1d814869f73c0.js",
+  "precache-manifest.80763baa1775d25f050a65ef523142db.js": "/customers-app/precache-manifest.80763baa1775d25f050a65ef523142db.js",
   "service-worker.js": "/customers-app/service-worker.js",
   "static/css/main.caee6abb.chunk.css.map": "/customers-app/static/css/main.caee6abb.chunk.css.map",
   "static/media/logo.svg": "/customers-app/static/media/logo.5d5d9eef.svg"
