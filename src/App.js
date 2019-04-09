@@ -9,7 +9,7 @@ import NewCustomerContainer from './containers/NewCustomerContainer';
 class App extends Component {
     render() {
         return (
-            <BrowserRouter>
+            <BrowserRouter basename={process.env.PUBLIC_URL}>
                 <div className="App">
                     <Route exact path="/" component={HomeContainer}  />
                     <Route exact path="/customers" component={CustomersContainer} />
