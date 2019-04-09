@@ -18,6 +18,13 @@ class CustomerContainer extends Component {
         }
     }
 
+    handleOnDelete = values => {
+        const { id } = values
+        return this.props.updateCustomer(id).then(r => {
+            if (r.error) throw new SubmissionError(r.payload)
+        });
+    }
+
     handleOnBack = () => {
         this.props.history.goBack()
     }
@@ -32,18 +39,24 @@ class CustomerContainer extends Component {
             if (r.error) throw new SubmissionError(r.payload)
         });
     }
+    
+    renderCustomerControl = (isEdit, isDelelete) => {
+        const CustomerControl = isEdit ? CustomerEdit : CustomerData;
+        return <CustomerControl 
+                    {...this.props.customer} 
+                    onSubmit={this.handleOnSubmit}
+                    onSubmitSuccess={this.handleOnSubmitSuccess}
+                    onBack={this.handleOnBack}
+                    isDelele={!!isDelelete}
+                    onDelete={this.handleOnDelete}
+                    />;
+    }
 
     renderBody = () => (
         <Route path="/customers/:dni/edit" children={
-            ({ match }) => {
-                const CustomerControl = match ? CustomerEdit : CustomerData;
-                return <CustomerControl 
-                            {...this.props.customer} 
-                            onSubmit={this.handleOnSubmit}
-                            onSubmitSuccess={this.handleOnSubmitSuccess}
-                            onBack={this.handleOnBack}
-                            />;
-            }
+            ({ match: isEdit }) => 
+                (<Route path="/customers/:dni/del" children={
+                    ({ match: isDelelete }) => (this.renderCustomerControl(isEdit, isDelelete))} />)
         } /> 
     )
 
