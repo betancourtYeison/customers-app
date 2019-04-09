@@ -43,14 +43,14 @@ const toNumber = value => (
     value && Number(value)
 );
 
-const onlyGrow = (value, previousValue, values) => (
-    value && previousValue && value > previousValue ? value : previousValue
-);
+// const onlyGrow = (value, previousValue, values) => (
+//     value && previousValue && value > previousValue ? value : previousValue
+// );
 
 const CustomerEdit = ({ name, dni, age, handleSubmit, submitting, onBack, pristine, submitSucceeded }) => {
     return (
         <div>
-            <h2>Edición del cliente</h2>
+            <h2>Datos del cliente</h2>
             <form onSubmit={handleSubmit}>
                 <Field 
                     name="name" 
