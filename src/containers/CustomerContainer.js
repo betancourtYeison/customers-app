@@ -8,6 +8,7 @@ import CustomerEdit from '../components/CustomerEdit';
 import CustomerData from '../components/CustomerData';
 import { fetchCustomers } from '../actions/fetchCustomers';
 import { updateCustomer } from '../actions/updateCustomer';
+import { deleteCustomer } from '../actions/deleteCustomer';
 import { SubmissionError } from 'redux-form';
 
 class CustomerContainer extends Component {
@@ -18,10 +19,13 @@ class CustomerContainer extends Component {
         }
     }
 
-    handleOnDelete = values => {
-        const { id } = values
-        return this.props.updateCustomer(id).then(r => {
-            if (r.error) throw new SubmissionError(r.payload)
+    handleOnDelete = id => {
+        return this.props.deleteCustomer(id).then(r => {
+            if (r.error){
+                throw new SubmissionError(r.payload)
+            } else {
+                this.props.history.goBack()
+            }
         });
     }
 
@@ -76,12 +80,14 @@ CustomerContainer.propTypes = {
     dni: PropTypes.string.isRequired,
     customer: PropTypes.object,
     fetchCustomers: PropTypes.func.isRequired,
+    updateCustomer: PropTypes.func.isRequired,
+    deleteCustomer: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state, props) => ({
     customer: getCustomerByDni(state, props)
 });
 
-const mapDispatchToProps = { fetchCustomers, updateCustomer }
+const mapDispatchToProps = { fetchCustomers, updateCustomer, deleteCustomer }
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(CustomerContainer));
