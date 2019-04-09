@@ -1,17 +1,9 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { reduxForm, Field } from 'redux-form';
 import { setPropsAsInitial } from '../helpers/setPropsAsInitial';
 import CustomersActions from '../components/CustomersActions';
 import { Prompt } from 'react-router-dom';
-
-const MyField = ({ input, meta, type, label, name }) => (
-    <div>
-        <label htmlFor={name}>{label}</label>
-        <input {...input} type={!type ? "text" : type} />
-        {meta.touched && meta.error && <span>{meta.error}</span>}
-    </div>
-);
 
 const validate = values => {
     const error = {};
@@ -27,76 +19,103 @@ const validate = values => {
     return error;
 };
 
-// const isRequired = value => (
-//     !value && "Este campo es requerido"
-// );
+class CustomerEdit extends Component {
 
-const isNumber = value => (
-    isNaN(Number(value)) && "El campo debe ser un número"
-);
-
-const toUpperCase = value => (
-    value && value.toUpperCase()
-);
-
-const toNumber = value => (
-    value && Number(value)
-);
-
-// const onlyGrow = (value, previousValue, values) => (
-//     value && previousValue && value > previousValue ? value : previousValue
-// );
-
-const CustomerEdit = ({ name, dni, age, handleSubmit, submitting, onBack, pristine, submitSucceeded }) => {
-    return (
+    componentDidMount() {
+        if (this.txt) {
+            this.txt.focus()
+        }
+    }
+    
+    renderField = ({ input, meta, type, label, withFocus, id }) => (
         <div>
-            <h2>Datos del cliente</h2>
-            <form onSubmit={handleSubmit}>
-                <Field 
-                    name="name" 
-                    component={MyField} 
-                    type="text"
-                    // validate={isRequired}
-                    label="Nombre:"
-                    parse={toUpperCase}
-                    // format={toUpperCase}
-                    />
-                <Field 
-                    name="dni" 
-                    component={MyField} 
-                    type="text" 
-                    // validate={isRequired}
-                    label="DNI:"
-                    />
-                <Field 
-                    name="age" 
-                    component={MyField} 
-                    type="number" 
-                    // validate={[isRequired, isNumber]}
-                    validate={isNumber}
-                    label="Edad:"
-                    parse={toNumber}
-                    // normalize={onlyGrow}
-                    />
-                <CustomersActions>
-                    <button 
-                        type="submit" 
-                        disabled={pristine || submitting}>
-                        Aceptar
-                    </button>
-                    <button 
-                        type="button" 
-                        disabled={submitting} 
-                        onClick={onBack}>
-                        Cancelar
-                    </button>
-                </CustomersActions>
-                <Prompt
-                    when={!pristine && !submitSucceeded}
-                    message="Se perderán los datos si continua" />
-            </form>
+            <label htmlFor={id}>{label}</label>
+            <input 
+                id={id} 
+                ref={withFocus && (txt => this.txt = txt)} 
+                {...input} 
+                type={!type ? "text" : type}
+                />
+            {meta.touched && meta.error && <span>{meta.error}</span>}
         </div>
+    )
+    
+    // isRequired = value => (
+    //     !value && "Este campo es requerido"
+    // );
+    
+    isNumber = value => (
+        isNaN(Number(value)) && "El campo debe ser un número"
     );
+    
+    toUpperCase = value => (
+        value && value.toUpperCase()
+    );
+    
+    toNumber = value => (
+        value && Number(value)
+    );
+    
+    // onlyGrow = (value, previousValue, values) => (
+    //     value && previousValue && value > previousValue ? value : previousValue
+    // );
+
+    render() {
+        const { handleSubmit, submitting, onBack, pristine, submitSucceeded } = this.props
+        return (
+            <div>
+                <h2>Datos del cliente</h2>
+                <form onSubmit={handleSubmit}>
+                    <Field 
+                        withFocus
+                        id="name"
+                        name="name" 
+                        component={this.renderField} 
+                        type="text"
+                        // validate={this.isRequired}
+                        label="Nombre:"
+                        parse={this.toUpperCase}
+                        // format={this.toUpperCase}
+                        />
+                    <Field 
+                        id="dni"
+                        name="dni" 
+                        component={this.renderField} 
+                        type="text" 
+                        // validate={this.isRequired}
+                        label="DNI:"
+                        />
+                    <Field 
+                        id="age"
+                        name="age" 
+                        component={this.renderField} 
+                        type="number" 
+                        // validate={[isRequired, isNumber]}
+                        validate={this.isNumber}
+                        label="Edad:"
+                        parse={this.toNumber}
+                        // normalize={onlyGrow}
+                        />
+                    <CustomersActions>
+                        <button 
+                            type="submit" 
+                            disabled={pristine || submitting}>
+                            Aceptar
+                        </button>
+                        <button 
+                            type="button" 
+                            disabled={submitting} 
+                            onClick={onBack}>
+                            Cancelar
+                        </button>
+                    </CustomersActions>
+                    <Prompt
+                        when={!pristine && !submitSucceeded}
+                        message="Se perderán los datos si continua" />
+                </form>
+            </div>
+        );
+    }
 };
 
 CustomerEdit.propTypes = {
